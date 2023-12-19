@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router'
 import { LoginPageComponent } from './auth/pages/login-page/login.component'
 
 const routes: Routes = [
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+
   {
     path: 'login',
     component: LoginPageComponent
