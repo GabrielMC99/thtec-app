@@ -10,8 +10,8 @@
       <h2 class="text-2xl font-semibold text-gray-700 text-center">THTEC</h2>
       <p class="text-xl text-gray-600 text-center">Bienvenido️</p>
 
-      <form class="max-w-sm mx-auto">
-        <div class="mb-5">
+      <form [formGroup]="loginForm" (submit)="onSubmit()" class="max-w-sm mx-auto">
+        <div class="mb-10 relative">
           <label for="user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Usuario</label>
           <div class="flex">
             <span
@@ -31,42 +31,53 @@
             </span>
             <input
               type="text"
-              id="user"
+              id="email"
+              name="email"
               class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Bonnie Green"
+              placeholder="user@example.com"
+              formControlName="email"
             />
+            @if (validateInput(email!)) {
+              @if (email!.errors?.['required']) {
+                <span class="text-red-500 absolute -bottom-7 text-sm opacity-80 font-medium">El correo es requerido!</span>
+              }
+            }
           </div>
         </div>
 
-        <div class="mb-5">
+        <div class="mb-10 relative">
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
           <div class="flex">
             <span
               class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
             >
-              <svg
-                class="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" data-slot="icon" class="w-4 h-4 text-gray-500 dark:text-gray-400">
                 <path
-                  d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
+                  fill-rule="evenodd"
+                  d="M15.75 1.5a6.75 6.75 0 0 0-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 0 0-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 0 0 .75-.75v-1.5h1.5A.75.75 0 0 0 9 19.5V18h1.5a.75.75 0 0 0 .53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1 0 15.75 1.5Zm0 3a.75.75 0 0 0 0 1.5A2.25 2.25 0 0 1 18 8.25a.75.75 0 0 0 1.5 0 3.75 3.75 0 0 0-3.75-3.75Z"
+                  clip-rule="evenodd"
                 />
               </svg>
             </span>
             <input
               type="text"
               id="password"
+              name="password"
               class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Bonnie Green"
+              placeholder="password"
+              formControlName="password"
             />
           </div>
+
+          @if (validateInput(password!)) {
+            @if (password!.errors?.['required']) {
+              <span class="text-red-500 absolute -bottom-7 text-sm opacity-80 font-medium">La contraseña es requerida!</span>
+            }
+          }
         </div>
 
         <div class="mt-8">
-          <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Login</button>
+          <button type="submit" class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Login</button>
         </div>
       </form>
 

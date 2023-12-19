@@ -11,4 +11,8 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     initFlowbite()
   }
+
+  public onSearch(search: string): void {
+    console.log('shared-navigation >>>', search)
+  }
 }
